@@ -12,19 +12,19 @@ PATTERN_EQUAL = r"(\w+)\.(\w+)\s?[=,>,<]=\s?'?(.*?)'?$"
 def parse(validate):
     result = {}
     if '&&' in validate:
-        arr = validate.strip().lstrip('(').rstrip(')').split('&&')
+        arr = validate.strip().split('&&')
         for item in arr:
             if (item.strip().startswith('(')):
                 dic = parse(item.strip())
                 if not dic:
-                    print('parse it null: ',item.strip())
+                    print('parse it null: ', item.strip())
                     continue
                 for key in dic.keys():
                     result[key] = dic[key]
             else:
                 data = parseExpress(item.strip())
+                result[data[0]] = data[1]
 
-            result[data[0]] = data[1]
     else:
         arr = validate.strip().lstrip('(').rstrip(')').split('||')
         data = parseExpress(arr[0].strip())
@@ -33,6 +33,7 @@ def parse(validate):
 
 
 def parseExpress(express):
+    express = express.lstrip('(').rstrip(')')
     data = ()
     obj = re.match(PATTERN_INDEXOF, express)
     if obj:
