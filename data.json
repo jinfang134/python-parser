@@ -1,0 +1,34 @@
+[
+    {
+        "validate": " PaymentDebitPostProcess.transactionType == '@' && (PaymentDebitPostProcess.senderParentId == 0 || PaymentDebitPostProcess.senderParentId == null || PaymentDebitPostProcess.senderParentId == '') && PaymentDebitPostProcess.fundingTransactionTypeV2== 'H' && (PaymentDebitPostProcess.fundingStatus == 'P' || PaymentDebitPostProcess.fundingStatus == 'R') && PaymentDebitPostProcess.verticalCategoryId.indexOf('jewelry') >= 0",
+        "data": {
+            "PaymentDebitPostProcess.TransactionType": "@",
+            "PaymentDebitPostProcess.SenderParentId": "0",
+            "PaymentDebitPostProcess.FundingTransactionTypeV2": "H",
+            "PaymentDebitPostProcess.FundingStatus": "P",
+            "PaymentDebitPostProcess.VerticalCategoryId": "jewelry"
+        }
+    },
+    {
+        "validate": "(IDisputeCaseSender.disputeReason==1||IDisputeCaseSender.disputeReason==2)&& (IDisputeCaseSender.disputeState==41)",
+        "data": {
+            "IDisputeCaseSender.DisputeReason": "1",
+            "IDisputeCaseSender.DisputeState": "41"
+        }
+    },
+    {
+        "validate": "(IDisputeCaseSender.disputeReason==1||IDisputeCaseSender.disputeReason==2)&& (IDisputeCaseSender.disputeState >= 27 && IDisputeCaseSender.disputeState <=39)",
+        "data": {
+            "IDisputeCaseSender.DisputeReason": "1",
+            "IDisputeCaseSender.DisputeState": "39"
+        }
+    },
+    {
+        "validate": " RDAData.source_event=='ACCTCRT'&&((RDAData.cntry_code=='C2'&&RDAData.rawHdrs_pp_geo_loc!='CN')||(RDAData.cntry_code!='C2'&&RDAData.cntry_code!=RDAData.rawHdrs_pp_geo_loc))",
+        "data": {
+            "RDAData.Source_event": "ACCTCRT",
+            "RDAData.Cntry_code": "C2",
+            "RDAData.RawHdrs_pp_geo_loc": "EN"
+        }
+    }
+]
