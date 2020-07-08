@@ -6,7 +6,7 @@ import re
 
 
 PATTERN_INDEXOF = r"(\w+)\.(\w+)\.indexOf\('(.*)'\)\s?>=\s?0"
-PATTERN_EQUAL = r"(\w+)\.(\w+)\s?[=,>,<]=\s?'?(.*?)'?$"
+PATTERN_EQUAL = r"(\w+)\.(\w+)\s?[=,>,<]=\s?([\w@#']+)"
 
 
 def parse(validate):
@@ -30,6 +30,20 @@ def parse(validate):
         data = parseExpress(arr[0].strip())
         result[data[0]] = data[1]
     return result
+
+
+def validate(originExpress, result):
+    temp = originExpress
+    temp=temp.replace('&&','and')
+    temp=temp.replace('||','or')
+    temp=temp.replace('indexOf','index')
+    for key in result.keys():
+        if result[key].isdigit():
+            temp=temp.replace(key, result[key])
+        else:
+            temp=temp.replace(key,f"'{result[key]}'")
+    print(temp)
+    return eval(temp)
 
 
 def parseExpress(express):
