@@ -15,13 +15,13 @@ class NamesTestCase(unittest.TestCase):
             data = json.load(fo)
             return data
 
-    # def test_parse(self):
-    #     list = self.loadJson()
-    #     for item in list:
-    #         obj = parser.parse(item['validate'])
-    #         print('result is: ', obj)
-    #         self.maxDiff = None
-    #         self.assertDictEqual(obj, item['data'])
+    def test_parse(self):
+        list = self.loadJson()
+        for item in list:
+            obj = parser.parse(item['validate'])
+            print('result is: ', obj)
+            self.maxDiff = None
+            self.assertTrue(parser.validate(item['validate'],obj))
 
     def test_validate(self):
         str = '''PaymentDebitPostProcess.transactionType == '@' \
