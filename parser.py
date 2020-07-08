@@ -16,11 +16,10 @@ def parse(express):
     result = mergeDic(result, eq_result)
     index_result = compile(PATTERN_INDEXOF, express)
     result = mergeDic(result, index_result)
-    try:
-        success=validate(express,result)
-        if success:
-            print('解析成功！！！')
-    except (RuntimeError):
+    success=validate(express,result)
+    if success:
+        print('解析成功！！！')
+    else:
         print('部分解析失败')
     return result
 
@@ -58,7 +57,10 @@ def validate(originExpress, result):
         else:
             temp = temp.replace(key, f"'{result[key]}'")
     print(temp)
-    return eval(temp)
+    try:
+        return eval(temp)
+    except (NameError):
+        return bool()
 
 
 
