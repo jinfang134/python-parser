@@ -38,5 +38,8 @@ class NamesTestCase(unittest.TestCase):
         })
         self.assertTrue(result)
 
+    def test_replace(self):
+        result=parser.replaceIgnoreCase('test Hello','hello','world')
+        self.assertEqual(result,'test world')
 
 unittest.main()

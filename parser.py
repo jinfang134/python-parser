@@ -53,9 +53,9 @@ def validate(originExpress, result):
     temp = temp.replace('null', 'None')
     for key in result.keys():
         if result[key].isdigit():
-            temp = temp.replace(key, result[key])
+            temp = replaceIgnoreCase(temp,key, result[key])
         else:
-            temp = temp.replace(key, f"'{result[key]}'")
+            temp = replaceIgnoreCase(temp,key, f"'{result[key]}'")
     print(temp)
     try:
         return eval(temp)
@@ -63,6 +63,8 @@ def validate(originExpress, result):
         return bool()
 
 
+def replaceIgnoreCase(string, pattern, replace):
+    return re.sub(pattern,replace,string,flags=re.I)
 
 def upperFirst(str):
     return str[0:1].upper()+str[1:]
