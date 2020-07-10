@@ -1,35 +1,33 @@
 import re
-#  PaymentDebitPostProcess.transactionType == '@' \
-# && (PaymentDebitPostProcess.senderParentId == 0 || PaymentDebitPostProcess.senderParentId == null || PaymentDebitPostProcess.senderParentId == '') \
-# && PaymentDebitPostProcess.fundingTransactionTypeV2== 'H' \
-# && (PaymentDebitPostProcess.fundingStatus == 'P' || PaymentDebitPostProcess.fundingStatus == 'R') && PaymentDebitPostProcess.verticalCategoryId.indexOf('jewelry') >= 0
+import stringUtils
+from collectionUtils import mergeDic
 
 
 PATTERN_INDEXOF = r"(\w+)\.(\w+)\.indexOf\('(.*)'\)\s?>=\s?0"
 PATTERN_EQUAL = r"(\w+)\.(\w+)\s?[=,>,<]=\s?([\w@#']+)"
 
 
+def parse(express, initData={}):
+    """解析条件表达式，返回能够满足条件表达式的测试数据
 
-def parse(express):
+    Args:
+        express ([string]]): 要解析的条件表达式
+        initData (dict, optional): [初始化数据，用于条件表达式中右侧的数据填充]. Defaults to {}.
+
+    Returns:
+        [type]: [生成的测试数据]
+    """
     result = {}
     eq_result = compile(PATTERN_EQUAL, express)
     result = mergeDic(result, eq_result)
     index_result = compile(PATTERN_INDEXOF, express)
     result = mergeDic(result, index_result)
-    success=validate(express,result)
+    success = validate(express, mergeDic(result, initData))
     if success:
         print('解析成功！！！')
     else:
         print('部分解析失败')
-    return result
-
-
-# 合并两个dict，如果dica已经存在的属性，不进行覆盖
-def mergeDic(dica, dicb):
-    result = dica
-    for item in dicb.keys():
-        if item not in dica.keys():
-            result[item] = dicb[item]
+    print(result)
     return result
 
 
@@ -38,13 +36,15 @@ def compile(pattern, origin):
     equal_pattern = re.compile(pattern)
     list = equal_pattern.findall(origin)
     for item in list:
-        key = item[0]+'.'+item[1]
+        key = item[0]+'.'+stringUtils.upperFirst(item[1])
         result[key] = str(item[2].replace('\'', ''))
     return result
 
 # 将测试数据代入表达式，验证数据是否符合逻辑表达式的要求，
 #　originExpress: 原始的逻辑表达式
 #  result: 测试数据
+
+
 def validate(originExpress, result):
     temp = originExpress
     temp = temp.replace('&&', ' and ')
@@ -53,27 +53,18 @@ def validate(originExpress, result):
     temp = temp.replace('null', 'None')
     for key in result.keys():
         if result[key].isdigit():
-            temp = replaceIgnoreCase(temp,key, result[key])
+            temp = stringUtils.replaceIgnoreCase(temp, key, result[key])
         else:
-            temp = replaceIgnoreCase(temp,key, f"'{result[key]}'")
-    print(temp)
+            temp = stringUtils.replaceIgnoreCase(temp, key, f"'{result[key]}'")
     try:
         return eval(temp)
     except (NameError):
+        print('解析失败，解析结果如下，请检查！')
+        print(temp)
         return bool()
 
 
-def replaceIgnoreCase(string, pattern, replace):
-    return re.sub(pattern,replace,string,flags=re.I)
-
-def upperFirst(str):
-    return str[0:1].upper()+str[1:]
-
-
-
-originStr = '''PaymentDebitPostProcess.transactionType == '@' \
-&& (PaymentDebitPostProcess.senderParentId == 0 || PaymentDebitPostProcess.senderParentId == null || PaymentDebitPostProcess.senderParentId == '') \
-&& PaymentDebitPostProcess.fundingTransactionTypeV2== 'H' \
-&& (PaymentDebitPostProcess.fundingStatus == 'P' || PaymentDebitPostProcess.fundingStatus == 'R') \
-&& PaymentDebitPostProcess.verticalCategoryId.indexOf('jewelry') >= 0'''
-parse(originStr)
+originStr = '''RDAData.source_event=='ACCTCRT'&&((RDAData.cntry_code=='C2'&&RDAData.rawHdrs_pp_geo_loc!='CN')||(RDAData.cntry_code!='C2'&&RDAData.cntry_code!=RDAData.rawHdrs_pp_geo_loc))'''
+parse(originStr, {
+    "RDAData.rawHdrs_pp_geo_loc": 'JA'
+})

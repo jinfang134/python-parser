@@ -3,6 +3,7 @@
 import unittest
 import parser
 import json
+from stringUtils import replaceIgnoreCase, upperFirst
 
 
 class NamesTestCase(unittest.TestCase):
@@ -21,7 +22,7 @@ class NamesTestCase(unittest.TestCase):
             obj = parser.parse(item['validate'])
             print('result is: ', obj)
             self.maxDiff = None
-            self.assertTrue(parser.validate(item['validate'],obj))
+            self.assertTrue(parser.validate(item['validate'], obj))
 
     def test_validate(self):
         str = '''PaymentDebitPostProcess.transactionType == '@' \
@@ -39,7 +40,8 @@ class NamesTestCase(unittest.TestCase):
         self.assertTrue(result)
 
     def test_replace(self):
-        result=parser.replaceIgnoreCase('test Hello','hello','world')
-        self.assertEqual(result,'test world')
+        result = replaceIgnoreCase('test Hello', 'hello', 'world')
+        self.assertEqual(result, 'test world')
+
 
 unittest.main()
