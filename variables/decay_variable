@@ -1,0 +1,28 @@
+{
+   "bank_routing_vm_addfi_instnt_bank_cnt_5": {
+    "release_date": "2020-05-06",
+    "comment": "GRSVT-3589",
+    "container_type": "EVE_BANK_ROUTING",
+    "variable_type": "decay",
+    "expected_value": [],
+    "validate": "VenmoAddFundingInstrument.fundingInstrumentType == 'BANK' && VenmoAddFundingInstrument.bankConfirmationMethod == 'INSTANT_CONFIRMATION'",
+    "queue_name": "risk.postpersist.venmo_cashout",
+    "container_key": "E8SBQ30QH4",
+    "do": {
+      "VenmoAddFundingInstrument.FundingInstrumentType": "BANK",
+      "VenmoAddFundingInstrument.BankConfirmationMethod": "INSTANT_CONFIRMATION",
+      "VenmoAddFundingInstrument.BankRoutingNumber": "E8SBQ30QH4"
+    },
+    "do_override": {},
+    "data_injection": [],
+    "negative_case": {
+      "negative_test": true,
+      "negative_do_override": {
+        "VenmoAddFundingInstrument.BankConfirmationMethod": "todo"
+      },
+      "expected_value": []
+    },
+    "is_legacy": false,
+    "is_aerospike": true
+  }
+}

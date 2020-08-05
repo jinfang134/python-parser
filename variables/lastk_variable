@@ -1,0 +1,32 @@
+{
+  "r_bre_model_result_valid_non_distinct_last20_atom19": {
+      "release_date": "2020-08-11",
+      "comment": "GRSVT-4139",
+      "variable_type": "lastk",
+      "container_key": "1534526750322550708",
+      "container_type": "EVE_ACCOUNT_CACHE",
+      "validate": "ConsolidatedFundingModelResult.atom19 != -999.0",
+      "queue_name": "risk.postpersist.venmo_cashout",
+      "expected_value": [
+         "\"100\",\"200\""
+      ],
+      "do": {
+         "ConsolidatedFundingModelResult.ReceiverAccountNumber": "1534526750322550708",
+         "ConsolidatedFundingModelResult.Atom19": "100"
+      },
+      "do_override": {
+         "ConsolidatedFundingModelResult.Atom19": "200"
+      },
+      "data_injection": [],
+      "is_aerospike": true,
+      "negative_case": {
+         "negative_test": true,
+         "expected_value": [
+            "\"100\""
+         ],
+         "negative_do_override": {
+            "ConsolidatedFundingModelResult.Atom19": "-999"
+         }
+      }
+   }
+}

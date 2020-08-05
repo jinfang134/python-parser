@@ -1,0 +1,32 @@
+{
+    "app_guid_rda_addcc_cnt_sw72": {
+      "release_date": "2020-06-16",
+      "comment": "GRSVT-3911",
+      "container_type": "EVE_DEVICE_APP",
+      "variable_type": "sliding_window",
+      "expected_value": [
+         ",2,2,2"
+      ],
+      "validate": "RDAData.source_event=='DCSNRSLT_ADDCC'&&RDAData.accountNumber!='0'",
+      "queue_name": "risk.postpersist.venmo_cashout",
+      "container_key": "UB93MSOJ1D",
+      "do": {
+         "RDAData.Rda_app_guid": "UB93MSOJ1D",
+         "RDAData.Source_event": "DCSNRSLT_ADDCC",
+         "RDAData.AccountNumber": "1"
+      },
+      "do_override": {},
+      "data_injection": [],
+      "negative_case": {
+         "expected_value": [
+            ",1,1,1"
+         ],
+         "negative_do_override": {
+            "RDAData.Source_event": "TODO"
+         },
+         "negative_test": true
+      },
+      "is_legacy": false,
+      "is_aerospike": true
+   }
+}
