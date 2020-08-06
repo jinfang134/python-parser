@@ -1,3 +1,5 @@
+
+```js
 {
   "bank_routing_vm_addfi_instnt_bank_cnt_5":
   //decay类型的variable的name有一些特殊，由brd中的三部分合成：
@@ -14,7 +16,8 @@
     "variable_type": "decay",
     //decay类型的变量不设置expect值
     "expected_value": [],
-    //brd里面的      "filter_expression": "VenmoAddFundingInstrument.fundingInstrumentType == 'BANK' && VenmoAddFundingInstrument.bankConfirmationMethod == 'INSTANT_CONFIRMATION'",
+    // brd里面的      
+    // "filter_expression": "VenmoAddFundingInstrument.fundingInstrumentType == 'BANK' && VenmoAddFundingInstrument.bankConfirmationMethod == 'INSTANT_CONFIRMATION'",
     "validate": "VenmoAddFundingInstrument.fundingInstrumentType == 'BANK' && VenmoAddFundingInstrument.bankConfirmationMethod == 'INSTANT_CONFIRMATION'",
     //需要特殊处理的字段，初步设想是根据event，one-one map
     "queue_name": "risk.postpersist.venmo_cashout",
@@ -39,12 +42,14 @@
     },
     "is_legacy": false,
     "is_aerospike": true
-  },
+  }
+}
+```
 
+brd data:
 
-
-
-
+```js
+{
   "status": "Implemented",
   "name": "bank_routing_vm_addfi_instnt_bank",
   "factors": [
@@ -75,7 +80,8 @@
   "type": "WRITING_EDGE",
   "round": true,
   "description": "For every bankRoutingNumber from EdgeVenmoAddFIWorkflow, consider instant comfirmation bank account population, calculate decay"
-},
+}
+```
 
 
 

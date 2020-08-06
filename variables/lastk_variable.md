@@ -1,3 +1,4 @@
+```js
 {
   "r_bre_model_result_valid_non_distinct_last20_atom19": {
     "release_date": "2020-08-11",
@@ -34,12 +35,13 @@
       }
     }
   },
+}
 
+```
 
-
-
-
-
+brd data:
+```
+{
   "status": "Implemented",
   "capacity": 20,
   "name": "r_bre_model_result_valid_non_distinct_last20_atom19",
@@ -63,4 +65,4 @@
   "type": "WRITING_EDGE",
   "description": "For every receiver_account_number from EdgeConsolidatedFundingModelResultWorkflow, consider score is not -999 population, calculate lastK lastk of atom19"
 }
-}
+```

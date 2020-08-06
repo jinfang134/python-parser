@@ -1,3 +1,4 @@
+```json
 {
   "app_guid_rda_addcc_cnt_sw72":
   //sliding_window里面分四种
@@ -35,10 +36,11 @@
     "is_legacy": false,
     "is_aerospike": true
   },
+}
+```
 
-
-
-
+```json
+{
   "name": "app_guid_rda_addcc_cnt_sw72",
   "type": "WRITING_EDGE",
   "status": "Implemented",
@@ -74,3 +76,4 @@
     }
   ]
 }
+```
