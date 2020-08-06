@@ -19,7 +19,9 @@ class NamesTestCase(unittest.TestCase):
     def test_parse(self):
         list = self.loadJson()
         for item in list:
-            obj = parser.parse(item['validate'])
+            obj = parser.parse(item['validate'],{
+                "RDAData.rawHdrs_pp_geo_loc":'EN'
+            })
             print('result is: ', obj)
             self.maxDiff = None
             self.assertTrue(parser.validate(item['validate'], obj))

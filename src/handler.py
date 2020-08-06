@@ -1,22 +1,28 @@
-from . import parser 
-import stringUtils
+from . import parser
+from . import stringUtils
+
 
 class AbstractHandler:
 
     # 需要特殊处理的字段，初步设想是根据event，one-one map
-    def get_queue_name(self):    
+    def get_queue_name(self):
         return 'risk.postpersist.venmo_cashout'
 
-    def parseValidate(self,filter_expression):
+    def parseValidate(self, filter_expression):
         return parser.parse(filter_expression)
-    pass
+
+    def handle(self, brd):
+        pass
+
+    def get_key(self):
+        pass
 
 
 class DecayHandler(AbstractHandler):
 
-    def parse(self,brd):
-        do_data=self.parse(brd.filter_expression)
-        key=stringUtils.randomStr(10)
+    def handle(self, brd):
+        do_data = self.parseValidate(brd.filter_expression)
+        key = stringUtils.randomStr(10)
         do_data.update({
             brd.key_expression: key
         })
@@ -51,4 +57,4 @@ class DecayHandler(AbstractHandler):
             "is_aerospike": bool('true')
         }
         return content
-    pass
+    
