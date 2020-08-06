@@ -1,6 +1,5 @@
 import re
 import stringUtils
-from collectionUtils import mergeDic
 
 
 PATTERN_INDEXOF = r"(\w+)\.(\w+)\.indexOf\('(.*)'\)\s?>=\s?0"
@@ -19,10 +18,11 @@ def parse(express, initData={}):
     """
     result = {}
     eq_result = compile(PATTERN_EQUAL, express)
-    result = mergeDic(result, eq_result)
     index_result = compile(PATTERN_INDEXOF, express)
-    result = mergeDic(result, index_result)
-    success = validate(express, mergeDic(result, initData))
+    result.update(index_result)
+    result.update(eq_result)
+    result.update(initData)
+    success = validate(express, result)
     if success:
         print('解析成功！！！')
     else:
@@ -62,6 +62,7 @@ def validate(originExpress, result):
         print('解析失败，解析结果如下，请检查！')
         print(temp)
         return bool()
+
 
 if __name__ == "__main__":
     originStr = '''RDAData.source_event=='ACCTCRT'&&((RDAData.cntry_code=='C2'&&RDAData.rawHdrs_pp_geo_loc!='CN')\
