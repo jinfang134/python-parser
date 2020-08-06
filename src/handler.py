@@ -1,4 +1,4 @@
-import parser 
+from . import parser 
 import stringUtils
 
 class AbstractHandler:

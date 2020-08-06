@@ -1,4 +1,4 @@
-from handler import DecayHandler,AbstractHandler
+from .handler import DecayHandler,AbstractHandler
 
 class BrdHandlerFactory:
 

@@ -1,5 +1,5 @@
 import re
-import stringUtils
+from . import stringUtils
 
 
 PATTERN_INDEXOF = r"(\w+)\.(\w+)\.indexOf\('(.*)'\)\s?>=\s?0"

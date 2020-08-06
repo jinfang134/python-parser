@@ -1,9 +1,9 @@
 
 
 import unittest
-import parser
 import json
-from stringUtils import replaceIgnoreCase, upperFirst
+from src import parser
+from src.stringUtils import replaceIgnoreCase, upperFirst
 
 
 class NamesTestCase(unittest.TestCase):
@@ -12,7 +12,7 @@ class NamesTestCase(unittest.TestCase):
     '''
 
     def loadJson(self):
-        with open('./data.json', 'r') as fo:
+        with open('data.json', 'r') as fo:
             data = json.load(fo)
             return data
 
