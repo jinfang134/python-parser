@@ -63,8 +63,9 @@ def validate(originExpress, result):
         print(temp)
         return bool()
 
-
-originStr = '''RDAData.source_event=='ACCTCRT'&&((RDAData.cntry_code=='C2'&&RDAData.rawHdrs_pp_geo_loc!='CN')||(RDAData.cntry_code!='C2'&&RDAData.cntry_code!=RDAData.rawHdrs_pp_geo_loc))'''
-parse(originStr, {
-    "RDAData.rawHdrs_pp_geo_loc": 'JA'
-})
+if __name__ == "__main__":
+    originStr = '''RDAData.source_event=='ACCTCRT'&&((RDAData.cntry_code=='C2'&&RDAData.rawHdrs_pp_geo_loc!='CN')\
+        ||(RDAData.cntry_code!='C2'&&RDAData.cntry_code!=RDAData.rawHdrs_pp_geo_loc))'''
+    parse(originStr, {
+        "RDAData.rawHdrs_pp_geo_loc": 'JA'
+    })

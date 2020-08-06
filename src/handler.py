@@ -1,5 +1,5 @@
-from . import parser 
-from . import stringUtils
+import parser 
+import stringUtils
 
 class AbstractHandler:
 
