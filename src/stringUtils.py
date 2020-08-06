@@ -25,5 +25,6 @@ def randomStr(length):
     return result_str
 
 
+
 if __name__ == "__main__":
     randomStr(8)

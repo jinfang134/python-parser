@@ -20,6 +20,19 @@ class AbstractHandler:
 
 class DecayHandler(AbstractHandler):
 
+
+    def get_key(self,brd):
+        """  "bank_routing_vm_addfi_instnt_bank_cnt_5":
+  //decay类型的variable的name有一些特殊，由brd中的三部分合成：
+          //  "name": "bank_routing_vm_addfi_instnt_bank",
+          //  "aggregation_type": ["CNT"],
+          // "factors": [5,10,20,40,80 ],
+        Args:
+            brd ([type]): [description]
+        """
+        return brd['name']+'_'+brd['aggregation_type']+'_'+brd['factors'][0]
+
+
     def handle(self, brd):
         do_data = self.parseValidate(brd.filter_expression)
         key = stringUtils.randomStr(10)
