@@ -40,7 +40,7 @@
 ```
 
 brd data:
-```
+```json
 {
   "status": "Implemented",
   "capacity": 20,

@@ -24,7 +24,8 @@ def randomStr(length):
     print("Random string is:", result_str)
     return result_str
 
-
+def randomNumber(length):
+    return random.choice('123456789')+''.join(random.choice('0123456789') for i in range(length-1))
 
 if __name__ == "__main__":
     randomStr(8)

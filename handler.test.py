@@ -10,7 +10,10 @@ class NamesTestCase(unittest.TestCase):
     '''
 
     def test_factory(self):
-        handler = BrdHandlerFactory.getBrdHandler('decay')
+        brd_list = []
+        for brd in brd_list:
+            handler = BrdHandlerFactory.getBrdHandler(brd['type'])
+            obj = handler.handle(brd)
         self.assertIsInstance(handler, AbstractHandler)
         pass
 
