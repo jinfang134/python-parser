@@ -1,5 +1,5 @@
 
-＞　127.0.0.1 - - [25/Nov/2020 16:31:17] "GET /todo/api/v1.0/tasks HTTP/1.1" 200 -
+> 127.0.0.1 - - [25/Nov/2020 16:31:17] "GET /todo/api/v1.0/tasks HTTP/1.1" 200 -
 
 | item | comment |
 |----| ----|
